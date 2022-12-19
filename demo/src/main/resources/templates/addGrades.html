@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add grades page</title>
+    <style>
+        th {
+            background-color: #04AA6D;
+            color: white;
+        }
+        th, td {
+            font-family: "Lucida Console", "Courier New", monospace;
+            padding: 15px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #d3d3d3;
+        }
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+
+
+<form action="#" th:object="$" th:action="@{/students/grades}" method="post">
+    <label for="fname" th:each="${students}"></label>
+    <input type="text" id="fname" name="fname"><br>
+    <input type="submit" value="Submit">
+</form>
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Student</th>-->
+<!--        <th>Grades</th>-->
+<!--        <th>Add grade</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+
+<!--    <tbody>-->
+<!--    <tr th:each="student: ${students}">-->
+<!--        <td th:text="${student.name}">-->
+<!--        <td th:text="${student.grades}">-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+</body>
+</html>

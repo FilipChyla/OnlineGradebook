@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Home page</title>
+
+    <style>
+        a{
+            font-family: "Lucida Console", "Courier New", monospace;
+
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            display: block;
+            margin-top: 5%;
+
+        }
+    </style>
+</head>
+
+<body>
+<a th:href="@{/view/students}" style="background-color: #04AA6D; margin-top: 25px">Students list </a>
+<a th:href="@{/students/grades}" style="background-color: #dc1414">Add grades</a>
+<a th:href="@{/students}" style="background-color: #0189ea">Add attendance</a>
+</body>
+
+</html>
