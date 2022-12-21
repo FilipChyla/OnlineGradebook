@@ -23,13 +23,6 @@ public class GradeRestController {
         return gradeService.getGrades(UUID.fromString(studentId));
     }
 
-//    @PostMapping("students/grades")
-//    ResponseEntity<String> addGrade(@RequestBody GradesDTO gradesDTO) {
-//        gradesDTO.grades.forEach((studentId, gradeValue) -> gradeService.addGrade(UUID.fromString(studentId), gradeValue, gradesDTO.description));
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).build();
-//    }
-
     @PostMapping("students/grades")
     ResponseEntity<String> addGrade(@RequestBody GradesDTO gradesDTO) {
         try {

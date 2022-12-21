@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Students list</title>
+
+    <style>
+        a{
+            font-family: "Lucida Console", "Courier New", monospace;
+
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            display: block;
+            margin-top: 5%;
+
+        }
+        th {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        th, td {
+            font-family: "Lucida Console", "Courier New", monospace;
+            padding: 15px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #d3d3d3;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        .grades{
+            display: inline;
+            background-color: aqua;
+        }
+        .attendance{
+            display: inline;
+            background-color: #ff4848;
+        }
+    </style>
+</head>
+
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>Student</th>
+        <th>Grades</th>
+        <th>Attendance</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    <tr th:each="student, itemStat: *{students}">
+        <td th:text="*{students[__${itemStat.index}__].name}">
+        <td>
+            <p class="grades" th:each="grade, gradeStat: *{student.grades}"
+               th:text="*{student.grades[__${gradeStat.index}__].grade}">
+            </p>
+        </td>
+
+        <td>
+            <p class="attendance" th:each="attendance, attendanceStat: *{student.attendanceList}"
+               th:text="*{student.attendanceList[__${attendanceStat.index}__].wasPresent}">
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<a th:href="@{/}" style="background-color: #04AA6D; margin-top: 25px">Go back</a>
+
+</body>
+
+</html>

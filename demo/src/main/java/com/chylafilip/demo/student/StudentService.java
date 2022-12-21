@@ -36,4 +36,8 @@ public class StudentService {
     public void updateStudent(Student student) {
         studentRepository.saveAndFlush(student);
     }
+
+    public void deleteStudent(UUID id){
+        studentRepository.deleteById(id);
+    }
 }

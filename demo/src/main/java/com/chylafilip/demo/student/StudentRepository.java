@@ -11,4 +11,7 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
     default UUID generateID() {
         return UUID.randomUUID();
     }
+
+    @Override
+    void deleteById(UUID uuid);
 }

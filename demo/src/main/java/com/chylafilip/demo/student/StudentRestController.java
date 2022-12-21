@@ -50,6 +50,23 @@ public class StudentRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
+    @PatchMapping("/students/{studentId}")
+    ResponseEntity<String> editStudentName(@PathVariable String studentId, @RequestParam String name){
+
+        Student student = studentService.getStudent(UUID.fromString(studentId));
+        student.setName(name);
+        studentService.updateStudent(student);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/students/{studentId}")
+    ResponseEntity<String> removeStudent(@PathVariable String studentId){
+        studentService.deleteStudent(UUID.fromString(studentId));
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
     @Data
     private static class StudentDTO {
         String name;
