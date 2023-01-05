@@ -24,7 +24,7 @@ public class GradeService {
         return studentService.getStudent(id).getGrades();
     }
 
-    public void addGrade(UUID studentId, int gradeValue, String description) throws IllegalArgumentException{
+    public void addGrade(UUID studentId, int gradeValue, String description) throws IllegalArgumentException {
         if (gradeValue < 2 || gradeValue > 5) {
             throw new IllegalArgumentException();
         }
@@ -38,5 +38,9 @@ public class GradeService {
 
         log.info("Added grade: " + grade + " to student: " + student);
 
+    }
+
+    public void deleteGrade(UUID gradeId){
+        gradeRepository.deleteById(gradeId);
     }
 }

@@ -23,21 +23,37 @@ public class GradeRestController {
         return gradeService.getGrades(UUID.fromString(studentId));
     }
 
+//    @PostMapping("students/grades")
+//    ResponseEntity<String> addGrade(@RequestBody GradesDTO gradesDTO) {
+//        try {
+//            gradesDTO.grades.forEach((studentId, gradeValue) -> gradeService.addGrade(UUID.fromString(studentId), gradeValue, gradesDTO.description));
+//        }catch (IllegalArgumentException e){
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//        }
+//
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).build();
+//    }
+
     @PostMapping("students/grades")
-    ResponseEntity<String> addGrade(@RequestBody GradesDTO gradesDTO) {
+    ResponseEntity<String> addGrade(@RequestBody Map<String, GradeDTO> grades) {
         try {
-            gradesDTO.grades.forEach((studentId, gradeValue) -> gradeService.addGrade(UUID.fromString(studentId), gradeValue, gradesDTO.description));
+            grades.forEach((studentId, grade) -> gradeService.addGrade(UUID.fromString(studentId), grade.gradeValue, "tmp"));
         }catch (IllegalArgumentException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @DeleteMapping("students/grades/{gradesId}")
+    ResponseEntity<String> deleteGrade(){
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
     @Data
-    private static class GradesDTO {
-        private Map<String, Integer> grades = new HashMap<>();
-        private String description;
+    private static class GradeDTO {
+        private int gradeValue;
     }
 }
