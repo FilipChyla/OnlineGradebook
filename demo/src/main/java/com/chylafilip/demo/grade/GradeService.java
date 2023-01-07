@@ -2,7 +2,6 @@ package com.chylafilip.demo.grade;
 
 import com.chylafilip.demo.student.Student;
 import com.chylafilip.demo.student.StudentService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
