@@ -2,6 +2,7 @@ package com.chylafilip.demo.grade;
 
 import com.chylafilip.demo.student.Student;
 import com.chylafilip.demo.student.StudentService;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,19 @@ public class GradeService {
 
     }
 
-    public void deleteGrade(UUID gradeId){
+    public void addGrades(String description, List<String> studentsId, List<Integer> gradeValues) {
+        studentsId.forEach((studentId) -> addGrade(UUID.fromString(studentId), gradeValues.get(studentsId.indexOf(studentId)), description));
+    }
+
+    public void deleteGrade(UUID gradeId) {
         gradeRepository.deleteById(gradeId);
+    }
+
+    public void editGrade(UUID gradeId, Grade grade) {
+        Grade gradeToUpdate = gradeRepository.getOne(gradeId);
+        gradeToUpdate.setDate(grade.getDate());
+        gradeToUpdate.setGrade(grade.getGrade());
+        gradeToUpdate.setDescription(grade.getDescription());
+        gradeRepository.saveAndFlush(gradeToUpdate);
     }
 }
