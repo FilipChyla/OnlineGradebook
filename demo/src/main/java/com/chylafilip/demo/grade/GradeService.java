@@ -40,12 +40,8 @@ public class GradeService {
 
     }
 
-    public void addGrades(String description, List<String> studentsId, List<Integer> gradeValues) {
-        studentsId.forEach((studentId) -> addGrade(UUID.fromString(studentId), gradeValues.get(studentsId.indexOf(studentId)), description));
-    }
-
-    public void deleteGrade(UUID gradeId) {
-        gradeRepository.deleteById(gradeId);
+    public void addGrades(String description, List<UUID> studentsId, List<Integer> gradeValues) {
+        studentsId.forEach((studentId) -> addGrade(studentId, gradeValues.get(studentsId.indexOf(studentId)), description));
     }
 
     public void editGrade(UUID gradeId, Grade grade) {
@@ -54,5 +50,9 @@ public class GradeService {
         gradeToUpdate.setGrade(grade.getGrade());
         gradeToUpdate.setDescription(grade.getDescription());
         gradeRepository.saveAndFlush(gradeToUpdate);
+    }
+
+    public void deleteGrade(UUID gradeId) {
+        gradeRepository.deleteById(gradeId);
     }
 }

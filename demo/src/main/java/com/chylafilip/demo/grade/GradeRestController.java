@@ -26,16 +26,10 @@ public class GradeRestController {
     @PostMapping("students/grades")
     ResponseEntity<String> addGrades(@RequestBody GradesDTO gradesDTO) {
         gradeService.addGrades( gradesDTO.description,
-                                gradesDTO.grades.stream().map((grade -> grade.studentId)).collect(Collectors.toList()),
+                                gradesDTO.grades.stream().map((grade -> UUID.fromString(grade.studentId))).collect(Collectors.toList()),
                                 gradesDTO.grades.stream().map((grade -> grade.gradeValue)).collect(Collectors.toList()));
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @DeleteMapping("students/grades/{gradeId}")
-    ResponseEntity<String> deleteGrade(@PathVariable String gradeId) {
-        gradeService.deleteGrade(UUID.fromString(gradeId));
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping("students/grades/{gradeId}")
@@ -43,6 +37,12 @@ public class GradeRestController {
         gradeService.editGrade(UUID.fromString(gradeId), GradeConverter.gradeDTOToGrade(gradeDTO));
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("students/grades/{gradeId}")
+    ResponseEntity<String> deleteGrade(@PathVariable String gradeId) {
+        gradeService.deleteGrade(UUID.fromString(gradeId));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Data
@@ -59,8 +59,8 @@ public class GradeRestController {
         private String date;
     }
 
-    private static class GradeConverter{
-        static Grade gradeDTOToGrade(GradeDTO gradeDTO){
+    private static class GradeConverter {
+        static Grade gradeDTOToGrade(GradeDTO gradeDTO) {
             Grade grade = new Grade();
             grade.setGrade(gradeDTO.gradeValue);
             grade.setDescription(gradeDTO.description);
