@@ -34,7 +34,7 @@ public class GradeService {
 
         Student student = studentService.getStudent(studentId);
         student.getGrades().add(grade);
-        studentService.updateStudent(student);
+        studentService.editStudent(studentId, student);
 
         log.info("Added grade: " + grade + " to student: " + student);
 

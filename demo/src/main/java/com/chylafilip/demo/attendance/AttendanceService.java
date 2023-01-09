@@ -24,6 +24,6 @@ public class AttendanceService {
 
         Student student = studentService.getStudent(studentId);
         student.getAttendanceList().add(attendance);
-        studentService.updateStudent(student);
+        studentService.editStudent(studentId, student);
     }
 }

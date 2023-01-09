@@ -33,7 +33,10 @@ public class StudentService {
         return studentRepository.findById(id).orElseThrow(ObjectNotFoundException::new);
     }
 
-    public void updateStudent(Student student) {
+    public void editStudent(UUID studentId, Student studentInfo) {
+        Student student = studentRepository.getOne(studentId);
+        student.setName(studentInfo.getName());
+
         studentRepository.saveAndFlush(student);
     }
 

@@ -50,12 +50,9 @@ public class StudentRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
-    @PatchMapping("/students/{studentId}")
-    ResponseEntity<String> editStudentName(@PathVariable String studentId, @RequestParam String name){
-
-        Student student = studentService.getStudent(UUID.fromString(studentId));
-        student.setName(name);
-        studentService.updateStudent(student);
+    @PutMapping("/students/{studentId}")
+    ResponseEntity<String> editStudent(@PathVariable String studentId, @RequestParam StudentDTO studentDTO){
+        studentService.editStudent(UUID.fromString(studentId), StudentConverter.studentDTOToStudent(studentDTO));
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -72,5 +69,14 @@ public class StudentRestController {
         String name;
 //        List<Grade> grades;
 //        List<Attendance> attendanceList;
+    }
+
+    private static class StudentConverter{
+        static Student studentDTOToStudent(StudentDTO studentDTO){
+            Student student = new Student();
+            student.setName(studentDTO.name);
+
+            return student;
+        }
     }
 }
